@@ -1,0 +1,573 @@
+.app-container {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* Realistic Wooden Wall Background */
+.wall-background {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    linear-gradient(90deg, 
+      rgba(0,0,0,0.1) 0%, 
+      transparent 3%, 
+      transparent 97%, 
+      rgba(0,0,0,0.1) 100%),
+    linear-gradient(
+      rgba(42, 24, 16, 0.3) 1px, 
+      transparent 1px),
+    linear-gradient(180deg, 
+      #3d2817 0%, 
+      #2a1810 50%, 
+      #1a0f08 100%);
+  background-size: 120px 100%, 100% 25px, 100% 100%;
+  z-index: -1;
+}
+
+.wall-background::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    repeating-linear-gradient(
+      90deg,
+      transparent,
+      transparent 95px,
+      rgba(0,0,0,0.15) 95px,
+      rgba(0,0,0,0.15) 98px
+    );
+  opacity: 0.6;
+}
+
+.wall-background::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 30% 40%, rgba(80,50,30,0.3) 0%, transparent 50%),
+    radial-gradient(circle at 70% 60%, rgba(60,40,25,0.2) 0%, transparent 50%);
+  opacity: 0.5;
+}
+
+/* Alphabet Wall */
+.alphabet-wall {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 40px 40px;
+  gap: 35px;
+}
+
+.wall-title {
+  font-family: 'Nosifer', sans-serif;
+  font-size: 1.8rem;
+  color: #c4955f;
+  text-align: center;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+  letter-spacing: 3px;
+  font-weight: 400;
+}
+
+.letter-row {
+  display: flex;
+  gap: 45px;
+  justify-content: center;
+  flex-wrap: wrap;
+  position: relative;
+}
+
+/* Letter Container with Light Above */
+.letter {
+  position: relative;
+  width: 50px;
+  height: 80px;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 10px;
+  cursor: default;
+  user-select: none;
+}
+
+/* Hand-painted letter on wall */
+.letter::before {
+  content: attr(data-letter);
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 2.5rem;
+  font-weight: 400;
+  font-family: 'Nosifer', sans-serif;
+  color: #1a0f08;
+  text-shadow: 
+    2px 2px 0px rgba(0,0,0,0.5),
+    -1px -1px 0px rgba(80,50,30,0.3),
+    1px 1px 3px rgba(0,0,0,0.4);
+  filter: contrast(1.3) brightness(0.85);
+  z-index: 1;
+  letter-spacing: 1px;
+}
+
+/* Unique rotation for each letter - hand-painted look */
+.letter[data-letter="A"]::before { transform: translateX(-50%) rotate(-4deg); }
+.letter[data-letter="B"]::before { transform: translateX(-50%) rotate(3deg); }
+.letter[data-letter="C"]::before { transform: translateX(-50%) rotate(-2deg); }
+.letter[data-letter="D"]::before { transform: translateX(-50%) rotate(5deg); }
+.letter[data-letter="E"]::before { transform: translateX(-50%) rotate(-3deg); }
+.letter[data-letter="F"]::before { transform: translateX(-50%) rotate(2deg); }
+.letter[data-letter="G"]::before { transform: translateX(-50%) rotate(-5deg); }
+.letter[data-letter="H"]::before { transform: translateX(-50%) rotate(4deg); }
+.letter[data-letter="I"]::before { transform: translateX(-50%) rotate(-2deg); }
+.letter[data-letter="J"]::before { transform: translateX(-50%) rotate(3deg); }
+.letter[data-letter="K"]::before { transform: translateX(-50%) rotate(-4deg); }
+.letter[data-letter="L"]::before { transform: translateX(-50%) rotate(2deg); }
+.letter[data-letter="M"]::before { transform: translateX(-50%) rotate(5deg); }
+.letter[data-letter="N"]::before { transform: translateX(-50%) rotate(-3deg); }
+.letter[data-letter="O"]::before { transform: translateX(-50%) rotate(4deg); }
+.letter[data-letter="P"]::before { transform: translateX(-50%) rotate(-5deg); }
+.letter[data-letter="Q"]::before { transform: translateX(-50%) rotate(3deg); }
+.letter[data-letter="R"]::before { transform: translateX(-50%) rotate(-2deg); }
+.letter[data-letter="S"]::before { transform: translateX(-50%) rotate(4deg); }
+.letter[data-letter="T"]::before { transform: translateX(-50%) rotate(-4deg); }
+.letter[data-letter="U"]::before { transform: translateX(-50%) rotate(2deg); }
+.letter[data-letter="V"]::before { transform: translateX(-50%) rotate(5deg); }
+.letter[data-letter="W"]::before { transform: translateX(-50%) rotate(-3deg); }
+.letter[data-letter="X"]::before { transform: translateX(-50%) rotate(3deg); }
+.letter[data-letter="Y"]::before { transform: translateX(-50%) rotate(-4deg); }
+.letter[data-letter="Z"]::before { transform: translateX(-50%) rotate(2deg); }
+
+
+/* Light bulb above each letter */
+.letter::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 26px;
+  border-radius: 9px 9px 50% 50%;
+  background: var(--bulb-color, #ff8844);
+  box-shadow: 
+    inset 2px 2px 4px rgba(255,255,255,0.3),
+    inset -2px -2px 4px rgba(0,0,0,0.2);
+  filter: brightness(0.5);
+  transition: filter 0.15s ease;
+  z-index: 3;
+}
+
+/* Bulb socket */
+.letter-bulb-socket {
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 12px;
+  height: 12px;
+  background: linear-gradient(135deg, #3a3a3a, #1a1a1a);
+  border-radius: 2px;
+  box-shadow: 
+    0 1px 3px rgba(0,0,0,0.7),
+    inset 0 1px 1px rgba(255,255,255,0.1);
+  z-index: 2;
+}
+
+/* Wire coming down from bulb */
+.letter-wire {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 8px;
+  background: linear-gradient(180deg, #1a1a1a, #2a2a2a);
+  box-shadow: 1px 0 1px rgba(0,0,0,0.5);
+  z-index: 1;
+}
+
+
+/* Light bulb colors - assigned per letter */
+.letter[data-letter="A"]::after,
+.letter[data-letter="J"]::after,
+.letter[data-letter="S"]::after { --bulb-color: linear-gradient(135deg, #ff4444, #cc0000); }
+
+.letter[data-letter="B"]::after,
+.letter[data-letter="K"]::after,
+.letter[data-letter="T"]::after { --bulb-color: linear-gradient(135deg, #4444ff, #0000cc); }
+
+.letter[data-letter="C"]::after,
+.letter[data-letter="L"]::after,
+.letter[data-letter="U"]::after { --bulb-color: linear-gradient(135deg, #ffdd44, #ccaa00); }
+
+.letter[data-letter="D"]::after,
+.letter[data-letter="M"]::after,
+.letter[data-letter="V"]::after { --bulb-color: linear-gradient(135deg, #44ff44, #00cc00); }
+
+.letter[data-letter="E"]::after,
+.letter[data-letter="N"]::after,
+.letter[data-letter="W"]::after { --bulb-color: linear-gradient(135deg, #ff44ff, #cc00cc); }
+
+.letter[data-letter="F"]::after,
+.letter[data-letter="O"]::after,
+.letter[data-letter="X"]::after { --bulb-color: linear-gradient(135deg, #44ffff, #00cccc); }
+
+.letter[data-letter="G"]::after,
+.letter[data-letter="P"]::after,
+.letter[data-letter="Y"]::after { --bulb-color: linear-gradient(135deg, #ff8844, #cc5500); }
+
+.letter[data-letter="H"]::after,
+.letter[data-letter="Q"]::after,
+.letter[data-letter="Z"]::after { --bulb-color: linear-gradient(135deg, #88ff44, #55cc00); }
+
+.letter[data-letter="I"]::after,
+.letter[data-letter="R"]::after { --bulb-color: linear-gradient(135deg, #ff4488, #cc0055); }
+
+/* Active state - only the bulb flickers and glows */
+.letter.active::after {
+  filter: brightness(2.5) saturate(1.5);
+  animation: bulbFlicker 0.8s ease-in-out;
+  box-shadow: 
+    inset 2px 2px 4px rgba(255,255,255,0.5),
+    inset -2px -2px 4px rgba(0,0,0,0.1),
+    0 0 20px var(--glow-color, rgba(255,200,100,0.8)),
+    0 0 40px var(--glow-color, rgba(255,200,100,0.6)),
+    0 0 60px var(--glow-color, rgba(255,200,100,0.4));
+}
+
+/* Glowing light effect on wall when bulb is active */
+.letter.active::before {
+  animation: letterIlluminate 0.8s ease-in-out;
+}
+
+@keyframes bulbFlicker {
+  0%, 100% { 
+    filter: brightness(0.5);
+  }
+  10%, 30%, 50%, 70%, 90% { 
+    filter: brightness(2.8) saturate(1.5);
+  }
+  20%, 40%, 60%, 80% { 
+    filter: brightness(1.5) saturate(1.2);
+  }
+}
+
+@keyframes crazyFlicker {
+  0%, 100% { opacity: 0.8; filter: brightness(0.8) saturate(1.2); }
+  10% { opacity: 1; filter: brightness(2.0) saturate(1.5); }
+  25% { opacity: 0.6; filter: brightness(0.6); }
+  40% { opacity: 1; filter: brightness(2.5) saturate(1.8); }
+  55% { opacity: 0.5; filter: brightness(0.5); }
+  70% { opacity: 0.9; filter: brightness(2.2); }
+  85% { opacity: 0.7; filter: brightness(0.7); }
+}
+
+/* Specific class for when all lights flicker together */
+.letter.flickering-all::after {
+  animation: crazyFlicker 2s infinite ease-in-out; /* Slower, smoother loop */
+  box-shadow: 
+    0 0 15px var(--glow-color, rgba(255,200,100,0.6)),
+    0 0 30px var(--glow-color, rgba(255,200,100,0.4));
+}
+
+.letter.flickering-all::before {
+  animation: letterIlluminate 2s infinite ease-in-out;
+}
+
+@keyframes letterIlluminate {
+  0%, 100% { 
+    text-shadow: 
+      1px 1px 0px rgba(0,0,0,0.4),
+      -1px -1px 0px rgba(80,50,30,0.2);
+  }
+  50% { 
+    text-shadow: 
+      0 0 10px rgba(255,255,200,0.6),
+      0 0 20px rgba(255,255,200,0.4),
+      1px 1px 0px rgba(0,0,0,0.4);
+  }
+}
+
+/* Fairy Light Wires - SVG overlay */
+/* Per-row wire SVG */
+.row-wire-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  pointer-events: none;
+  z-index: 0; /* Behind letters (1), sockets (2), bulbs (3) */
+  overflow: visible;
+}
+
+.wire-path {
+  fill: none;
+  stroke: #252525;
+  stroke-width: 3;
+  stroke-linecap: round;
+  filter: drop-shadow(0 2px 2px rgba(0,0,0,0.6));
+}
+
+
+/* Message Input Section */
+.message-input {
+  background: transparent;
+  padding: 30px;
+  border-top: none;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  align-items: center;
+  backdrop-filter: none;
+}
+
+.input-group {
+  display: flex;
+  gap: 10px;
+  width: 100%;
+  max-width: 800px;
+  flex-wrap: nowrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.message-input input {
+  flex: 1;
+  min-width: 250px;
+  padding: 12px 20px;
+  font-size: 1rem;
+  font-family: 'Courier New', monospace;
+  background: transparent;
+  border: 1px solid rgba(196, 149, 95, 0.5);
+  border-radius: 8px;
+  color: #fff;
+  outline: none;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+.message-input input::placeholder {
+  color: rgba(255,255,255,0.4);
+  text-transform: none;
+}
+
+.message-input input:focus {
+  border-color: #e4b57f;
+  background: rgba(255,255,255,0.05);
+  box-shadow: 0 0 15px rgba(196,149,95,0.2), inset 0 0 10px rgba(0,0,0,0.3);
+}
+
+.message-input button {
+  padding: 12px 30px;
+  font-size: 1rem;
+  font-family: 'Courier New', monospace;
+  font-weight: bold;
+  background: transparent;
+  border: 1px solid #c4955f;
+  border-radius: 8px;
+  color: #c4955f;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+
+.message-input button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 0 15px rgba(196,149,95,0.3);
+  background: rgba(196, 149, 95, 0.1);
+  color: #e4b57f;
+  border-color: #e4b57f;
+}
+
+.message-input button:active {
+  transform: translateY(0);
+}
+
+.message-input button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+  border-color: #5a4a40;
+  color: #5a4a40;
+}
+
+/* Share Section */
+.share-section {
+  display: none; /* Hidden as requested */
+}
+
+.share-url {
+  display: none;
+}
+
+.copy-btn {
+  /* Inherits from .message-input button styles now since it's just a button */
+  /* But we need to ensure specific overrides if any */
+  padding: 12px 30px !important;
+  font-size: 1rem !important;
+  background: transparent !important;
+  color: #c4955f !important;
+  border: 1px solid #c4955f !important;
+}
+
+.copy-btn:hover {
+  background: rgba(196, 149, 95, 0.1) !important;
+  color: #e4b57f !important;
+  border-color: #e4b57f !important;
+}
+
+.copy-btn.copied {
+  color: #44aa44 !important;
+  border-color: #44aa44 !important;
+  background: rgba(68, 170, 68, 0.1) !important;
+}
+
+/* Current Message Display */
+.current-message {
+  text-align: center;
+  color: #c4955f;
+  font-family: 'Courier New', monospace;
+  font-size: 1.2rem;
+  margin-top: 30px;
+  text-shadow: 0 0 10px rgba(196,149,95,0.5);
+  letter-spacing: 6px;
+  min-height: 30px;
+  font-weight: normal;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .alphabet-wall {
+    padding: 120px 20px 20px;
+    gap: 30px;
+  }
+
+  .wall-title {
+    font-size: 1.4rem;
+    margin-bottom: 20px;
+  }
+
+
+
+  .letter {
+    /* width handled by JS */
+    height: 70px;
+  }
+
+  .letter::before {
+    font-size: 2.3rem;
+  }
+
+  .letter::after {
+    width: 15px;
+    height: 22px;
+  }
+
+  .fairy-lights-wire {
+    top: 85px;
+  }
+
+  .message-input {
+    padding: 20px 15px;
+  }
+
+  .input-group,
+  .share-section {
+    max-width: 100%;
+  }
+
+  .message-input input,
+  .share-url {
+    min-width: 100%;
+  }
+
+  .current-message {
+    font-size: 1rem;
+    letter-spacing: 4px;
+  }
+}
+
+@media (max-width: 480px) {
+
+
+  .letter {
+    /* width handled by JS */
+    height: 60px;
+  }
+
+  .letter::before {
+    font-size: 1.8rem;
+  }
+
+  .letter::after {
+    width: 12px;
+    height: 18px;
+  }
+
+  .fairy-lights-wire {
+    top: 75px;
+    height: 120px;
+  }
+
+  .wall-title {
+    font-size: 1.1rem;
+  }
+
+  .current-message {
+    font-size: 0.9rem;
+    letter-spacing: 3px;
+  }
+}
+
+/* Floating GitHub Link */
+.github-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  color: #c4955f;
+  transition: all 0.3s ease;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(2px);
+  padding: 10px;
+  border: 1px solid rgba(196, 149, 95, 0.3);
+}
+
+.github-float:hover {
+  transform: translateY(-5px) scale(1.1);
+  color: #e4b57f;
+  border-color: #e4b57f;
+  box-shadow: 0 0 15px rgba(196, 149, 95, 0.4);
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.github-float svg {
+  width: 30px;
+  height: 30px;
+}
